@@ -6,19 +6,30 @@ describe('sort', function () {
   it('should be a function', function () {
     expect(sort).to.be.a('function');
   });
-  it('should sort by a single key', function () {
-    var list = [{name:'Zach'}, {name:'Alfred'}];
+  describe('passing a single sort field', function () {
+    it('should sort by a single key', function () {
+      var list = [{name:'Zach'}, {name:'Alfred'}];
 
-    sort(list, 'name');
+      sort(list, 'name');
 
-    expect(list[0].name).to.equal('Alfred');
+      expect(list[0].name).to.equal('Alfred');
+    });
+
+    it('should sort number values', function () {
+      var list = [{age: 55}, {age: 12}];
+
+      sort(list, 'age');
+
+      expect(list[0].age).to.equal(12);
+    });
   });
+  describe('passing multiple sort fields', function () {
+    it('should sort by leftmost field first', function () {
+      var list = [{name:'Zach', age:12}, {name:'Alfred', age:55}];
 
-  it('should sort number values', function () {
-    var list = [{age: 55}, {age: 12}];
+      sort(list, ['name', 'age']);
 
-    sort(list, 'age');
-
-    expect(list[0].age).to.equal(12);
+      expect(list[0].name).to.equal('Alfred');
+    });
   });
 });
