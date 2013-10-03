@@ -31,5 +31,12 @@ describe('sort', function () {
 
       expect(list[0].name).to.equal('Alfred');
     });
+    it('should sort by subsequent fields', function () {
+      var list = [{name:'John', age:19}, {name:'John', age:16}];
+
+      sort(list, ['name', 'age']);
+
+      expect(list[0].age).to.equal(16);
+    });
   });
 });
